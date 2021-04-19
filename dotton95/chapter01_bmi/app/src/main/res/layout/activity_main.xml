@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
-        <import type="android.view.View"/>
         <variable
-            name="dao"
-            type="fastcampus.aop.part2.chapter1_bmi.DAO" />
+            name="vm"
+            type="fastcampus.aop.part2.chapter1_bmi.Vm" />
     </data>
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +21,7 @@
 
         <EditText
             android:id="@+id/edt_height"
-            android:text="@={dao.height}"
+            android:text="@={vm.height}"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +38,7 @@
 
         <EditText
             android:id="@+id/edt_weight"
-            android:text="@={dao.weight}"
+            android:text="@={vm.weight}"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,7 +48,7 @@
         <Button
             android:id="@+id/btn_result"
             android:text="확인하기"
-            android:onClick="@{dao::btnClick}"
+            android:onClick="@{vm::btnClick}"
             android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

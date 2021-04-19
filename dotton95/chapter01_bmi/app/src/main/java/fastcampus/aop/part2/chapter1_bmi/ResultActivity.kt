@@ -9,14 +9,14 @@ import fastcampus.aop.part2.chapter1_bmi.databinding.ActivityMainBinding
 import fastcampus.aop.part2.chapter1_bmi.databinding.ActivityResultBinding
 import kotlin.math.pow
 
-class ResultActivity : AppCompatActivity() {
-    private lateinit var resultBinding: ActivityResultBinding
+class ResultActivity : BaseActivity<ActivityResultBinding>(R.layout.activity_result) {
     var bmi:String? = null
     var text:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        resultBinding = DataBindingUtil.setContentView(this,R.layout.activity_result)
+
+        binding.result = this
 
         val input_height  = intent.getIntExtra("input_height", 0)
         val input_weight  = intent.getIntExtra("input_weight", 0)
@@ -31,11 +31,8 @@ class ResultActivity : AppCompatActivity() {
             bmi1 >= 18.5 -> "정상체중"
             else -> "저체중"
         }
-
         bmi = String.format("%.1f",bmi1)
         text = result1
-
-        resultBinding.result = this
 
 
     }
