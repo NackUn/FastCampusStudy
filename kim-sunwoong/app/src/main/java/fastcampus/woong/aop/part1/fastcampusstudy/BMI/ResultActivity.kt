@@ -10,7 +10,7 @@ import kotlin.math.pow
 class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_result)
+        setContentView(R.layout.activity_bmi_result)
 
         val height = intent.getIntExtra("height", 0)
         val weight = intent.getIntExtra("weight", 0)
