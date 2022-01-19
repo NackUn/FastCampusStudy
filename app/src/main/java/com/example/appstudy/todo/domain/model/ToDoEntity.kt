@@ -1,6 +1,6 @@
-package com.example.appstudy.todo.data.model
+package com.example.appstudy.todo.domain.model
 
-data class ToDoDto(
+data class ToDoEntity(
     val id: Long = 0,
     val title: String,
     val description: String,

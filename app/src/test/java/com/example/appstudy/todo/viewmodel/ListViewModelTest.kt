@@ -1,6 +1,6 @@
 package com.example.appstudy.todo.viewmodel
 
-import com.example.appstudy.todo.data.model.ToDoDto
+import com.example.appstudy.todo.domain.model.ToDoEntity
 import com.example.appstudy.todo.domain.usecase.todo.InsertToDoListUseCase
 import com.example.appstudy.todo.presentation.list.ListViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,6 +17,7 @@ import org.koin.test.inject
  * 3. test Item Update
  * 4. test Item Delete All
  */
+@ExperimentalCoroutinesApi
 internal class ListViewModelTest : ViewModelTest() {
 
     private val viewModel: ListViewModel by inject()
@@ -24,7 +25,7 @@ internal class ListViewModelTest : ViewModelTest() {
     private val insertToDoListUseCase: InsertToDoListUseCase by inject()
 
     private val mockList = (0 until 10).map {
-        ToDoDto(
+        ToDoEntity(
             id = it.toLong(),
             title = "title $it",
             description = "description $it",
@@ -38,19 +39,16 @@ internal class ListViewModelTest : ViewModelTest() {
      * 2. GetToDoItemUseCase
      */
 
-    @ExperimentalCoroutinesApi
     @Before
     fun init() {
         initData()
     }
 
-    @ExperimentalCoroutinesApi
     private fun initData() = runBlockingTest {
         insertToDoListUseCase(mockList)
     }
 
     // Test : 입력된 데이터를 불러와서 검증한다.
-    @ExperimentalCoroutinesApi
     @Test
     fun `test viewModel fetch`(): Unit = runBlockingTest {
         val testObservable = viewModel.toDoList.test()

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.appstudy.todo.data.model.ToDoDto
+import com.example.appstudy.todo.domain.model.ToDoEntity
 import com.example.appstudy.todo.domain.usecase.todo.GetToDoListUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -19,8 +19,8 @@ internal class ListViewModel(
     private val getToDoListUseCase: GetToDoListUseCase,
 ) : ViewModel() {
 
-    private var _toDoList = MutableLiveData<List<ToDoDto>>()
-    val toDoList: LiveData<List<ToDoDto>> = _toDoList
+    private var _toDoList = MutableLiveData<List<ToDoEntity>>()
+    val toDoList: LiveData<List<ToDoEntity>> = _toDoList
 
     fun fetchData(): Job = viewModelScope.launch {
         _toDoList.postValue(getToDoListUseCase())
