@@ -70,6 +70,6 @@ internal class ListViewModelTest : ViewModelTest() {
             hasCompleted = true
         )
         viewModel.updateItem(todo)
-        getToDoItemUseCase(id = 1)
+        assert(getToDoItemUseCase(id = todo.id)?.hasCompleted ?: false == todo.hasCompleted)
     }
 }
