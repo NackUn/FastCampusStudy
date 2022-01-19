@@ -1,6 +1,7 @@
 package com.example.appstudy.todo.viewmodel
 
 import com.example.appstudy.todo.domain.model.ToDoEntity
+import com.example.appstudy.todo.domain.usecase.todo.GetToDoItemUseCase
 import com.example.appstudy.todo.domain.usecase.todo.InsertToDoListUseCase
 import com.example.appstudy.todo.presentation.list.ListViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -23,6 +24,7 @@ internal class ListViewModelTest : ViewModelTest() {
     private val viewModel: ListViewModel by inject()
 
     private val insertToDoListUseCase: InsertToDoListUseCase by inject()
+    private val getToDoItemUseCase: GetToDoItemUseCase by inject()
 
     private val mockList = (0 until 10).map {
         ToDoEntity(
@@ -68,5 +70,6 @@ internal class ListViewModelTest : ViewModelTest() {
             hasCompleted = true
         )
         viewModel.updateItem(todo)
+        getToDoItemUseCase(id = 1)
     }
 }

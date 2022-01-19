@@ -2,6 +2,7 @@ package com.example.appstudy.todo.di
 
 import com.example.appstudy.todo.data.repository.TestToDoRepositoryImpl
 import com.example.appstudy.todo.domain.repository.ToDoRepository
+import com.example.appstudy.todo.domain.usecase.todo.GetToDoItemUseCase
 import com.example.appstudy.todo.domain.usecase.todo.GetToDoListUseCase
 import com.example.appstudy.todo.domain.usecase.todo.InsertToDoListUseCase
 import com.example.appstudy.todo.domain.usecase.todo.UpdateToDoItemUseCase
@@ -15,9 +16,10 @@ internal val appTestModule = module {
     viewModel { ListViewModel(get(), get()) }
 
     // UseCase
-    factory { GetToDoListUseCase(get()) }
     factory { InsertToDoListUseCase(get()) }
+    factory { GetToDoListUseCase(get()) }
     factory { UpdateToDoItemUseCase(get()) }
+    factory { GetToDoItemUseCase(get()) }
 
     // Repository
     single<ToDoRepository> { TestToDoRepositoryImpl() }
