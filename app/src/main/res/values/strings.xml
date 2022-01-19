@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AppStudy</string>
+
+    <string name="main_bmi">BMI</string>
+
+    <string name="bmi_height">키</string>
+    <string name="bmi_weight">체중</string>
+    <string name="bmi_check">확인하기</string>
+</resources>
