@@ -72,4 +72,16 @@ internal class ListViewModelTest : ViewModelTest() {
         viewModel.updateItem(todo)
         assert(getToDoItemUseCase(id = todo.id)?.hasCompleted ?: false == todo.hasCompleted)
     }
+
+    // Test : 데이터를 다 날렸을 때 빈 상태로 보여지는가?
+    @Test
+    fun `test Item Delete All`(): Unit = runBlockingTest {
+        val testObservable = viewModel.toDoList.test()
+        viewModel.deleteAll()
+        testObservable.assertValueSequence(
+            listOf(
+                emptyList()
+            )
+        )
+    }
 }
