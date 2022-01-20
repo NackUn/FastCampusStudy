@@ -12,7 +12,7 @@ class TestToDoRepositoryImpl : ToDoRepository {
     }
 
     override suspend fun getToDoList(): List<ToDoEntity> {
-        return toDoList
+        return mutableListOf<ToDoEntity>().apply { addAll(toDoList) }
     }
 
     override suspend fun updateToDoItem(todoItem: ToDoEntity): Boolean {
