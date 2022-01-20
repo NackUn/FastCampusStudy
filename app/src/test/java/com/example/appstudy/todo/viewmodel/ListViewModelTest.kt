@@ -4,6 +4,7 @@ import com.example.appstudy.todo.domain.model.ToDoEntity
 import com.example.appstudy.todo.domain.usecase.todo.GetToDoItemUseCase
 import com.example.appstudy.todo.domain.usecase.todo.InsertToDoListUseCase
 import com.example.appstudy.todo.presentation.list.ListViewModel
+import com.example.appstudy.todo.presentation.list.ToDoListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
@@ -53,10 +54,14 @@ internal class ListViewModelTest : ViewModelTest() {
     // Test : 입력된 데이터를 불러와서 검증한다.
     @Test
     fun `test viewModel fetch`(): Unit = runBlockingTest {
-        val testObservable = viewModel.toDoList.test()
+        val testObservable = viewModel.toDoListState.test()
         viewModel.fetchData()
         testObservable.assertValueSequence(
-            listOf(mockList)
+            listOf(
+                ToDoListState.UnInitialized,
+                ToDoListState.Loading,
+                ToDoListState.Success(mockList),
+            )
         )
     }
 
@@ -76,11 +81,13 @@ internal class ListViewModelTest : ViewModelTest() {
     // Test : 데이터를 다 날렸을 때 빈 상태로 보여지는가?
     @Test
     fun `test Item Delete All`(): Unit = runBlockingTest {
-        val testObservable = viewModel.toDoList.test()
+        val testObservable = viewModel.toDoListState.test()
         viewModel.deleteAll()
         testObservable.assertValueSequence(
             listOf(
-                emptyList()
+                ToDoListState.UnInitialized,
+                ToDoListState.Loading,
+                ToDoListState.Success(emptyList())
             )
         )
     }
