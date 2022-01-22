@@ -9,6 +9,7 @@ import com.example.appstudy.todo.domain.model.ToDoEntity
  * 4. [getToDoItem]
  * 5. [deleteAllToDoItem]
  * 6. [insertToDoItem]
+ * 7. [deleteToDoItem]
  */
 interface ToDoRepository {
     suspend fun insertToDoList(todoList: List<ToDoEntity>)
@@ -17,4 +18,5 @@ interface ToDoRepository {
     suspend fun getToDoItem(id: Long): ToDoEntity?
     suspend fun deleteAllToDoItem()
     suspend fun insertToDoItem(todoItem: ToDoEntity)
+    suspend fun deleteToDoItem(id: Long)
 }

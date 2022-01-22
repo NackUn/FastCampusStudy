@@ -3,6 +3,7 @@ package com.example.appstudy.todo.di
 import com.example.appstudy.todo.data.repository.TestToDoRepositoryImpl
 import com.example.appstudy.todo.domain.repository.ToDoRepository
 import com.example.appstudy.todo.domain.usecase.todo.DeleteAllToDoItemUseCase
+import com.example.appstudy.todo.domain.usecase.todo.DeleteToDoItemUseCase
 import com.example.appstudy.todo.domain.usecase.todo.GetToDoItemUseCase
 import com.example.appstudy.todo.domain.usecase.todo.GetToDoListUseCase
 import com.example.appstudy.todo.domain.usecase.todo.InsertToDoItemUseCase
@@ -22,6 +23,7 @@ internal val appTestModule = module {
         DetailViewModel(
             detailMode = detailMode,
             id = id,
+            get(),
             get()
         )
     }
@@ -33,6 +35,7 @@ internal val appTestModule = module {
     factory { GetToDoItemUseCase(get()) }
     factory { DeleteAllToDoItemUseCase(get()) }
     factory { InsertToDoItemUseCase(get()) }
+    factory { DeleteToDoItemUseCase(get()) }
 
     // Repository
     single<ToDoRepository> { TestToDoRepositoryImpl() }

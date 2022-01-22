@@ -3,6 +3,7 @@ package com.example.appstudy.todo.presentation.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.appstudy.todo.domain.usecase.todo.DeleteToDoItemUseCase
 import com.example.appstudy.todo.domain.usecase.todo.GetToDoItemUseCase
 import com.example.appstudy.todo.presentation.base.BaseViewModel
 import kotlinx.coroutines.Job
@@ -11,7 +12,8 @@ import kotlinx.coroutines.launch
 internal class DetailViewModel(
     var detailMode: DetailMode,
     var id: Long = -1,
-    private val getToDoItemUseCase: GetToDoItemUseCase
+    private val getToDoItemUseCase: GetToDoItemUseCase,
+    private val deleteToDoItemUseCase: DeleteToDoItemUseCase,
 ) : BaseViewModel() {
 
     private var _toDoItemState = MutableLiveData<ToDoDetailState>(ToDoDetailState.UnInitialized)
@@ -35,6 +37,16 @@ internal class DetailViewModel(
             DetailMode.WRITE -> {
                 // TODO 나중에 작성모드로 상세화면 진입 로직 처리
             }
+        }
+    }
+
+    fun deleteToDoItem() = viewModelScope.launch {
+        try {
+            deleteToDoItemUseCase(id)
+            _toDoItemState.postValue(ToDoDetailState.Delete)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            _toDoItemState.postValue(ToDoDetailState.Error)
         }
     }
 }
