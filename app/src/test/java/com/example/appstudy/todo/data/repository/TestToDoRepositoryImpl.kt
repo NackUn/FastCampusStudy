@@ -29,4 +29,8 @@ class TestToDoRepositoryImpl : ToDoRepository {
     override suspend fun deleteAllToDoItem() {
         toDoList.clear()
     }
+
+    override suspend fun insertToDoItem(todoItem: ToDoEntity) {
+        this.toDoList.add(todoItem)
+    }
 }

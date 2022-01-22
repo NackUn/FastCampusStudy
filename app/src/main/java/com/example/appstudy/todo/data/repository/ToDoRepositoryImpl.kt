@@ -23,4 +23,8 @@ class ToDoRepositoryImpl : ToDoRepository {
     override suspend fun deleteAllToDoItem() {
         TODO("Not yet implemented")
     }
+
+    override suspend fun insertToDoItem(todoItem: ToDoEntity) {
+        TODO("Not yet implemented")
+    }
 }
