@@ -24,6 +24,7 @@ internal val appTestModule = module {
             detailMode = detailMode,
             id = id,
             get(),
+            get(),
             get()
         )
     }

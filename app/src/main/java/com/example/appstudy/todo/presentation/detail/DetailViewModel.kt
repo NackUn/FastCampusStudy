@@ -3,8 +3,10 @@ package com.example.appstudy.todo.presentation.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.appstudy.todo.domain.model.ToDoEntity
 import com.example.appstudy.todo.domain.usecase.todo.DeleteToDoItemUseCase
 import com.example.appstudy.todo.domain.usecase.todo.GetToDoItemUseCase
+import com.example.appstudy.todo.domain.usecase.todo.UpdateToDoItemUseCase
 import com.example.appstudy.todo.presentation.base.BaseViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -14,6 +16,7 @@ internal class DetailViewModel(
     var id: Long = -1,
     private val getToDoItemUseCase: GetToDoItemUseCase,
     private val deleteToDoItemUseCase: DeleteToDoItemUseCase,
+    private val updateToDoItemUseCase: UpdateToDoItemUseCase,
 ) : BaseViewModel() {
 
     private var _toDoItemState = MutableLiveData<ToDoDetailState>(ToDoDetailState.UnInitialized)
@@ -49,6 +52,21 @@ internal class DetailViewModel(
             }
         } catch (e: Exception) {
             e.printStackTrace()
+            _toDoItemState.postValue(ToDoDetailState.Error)
+        }
+    }
+
+    fun updateToDoItem() = viewModelScope.launch {
+        _toDoItemState.postValue(ToDoDetailState.Loading)
+        val currentToDoItem = ToDoEntity(
+            id = id,
+            title = "title $id",
+            description = "description $id",
+            hasCompleted = true
+        )
+        if (updateToDoItemUseCase(currentToDoItem)) {
+            _toDoItemState.postValue(ToDoDetailState.Success(currentToDoItem))
+        } else {
             _toDoItemState.postValue(ToDoDetailState.Error)
         }
     }
