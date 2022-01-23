@@ -28,6 +28,11 @@ class LiveDataTestObserver<T> : Observer<T> {
             val actual: T = actualIterator.next()
             val expected: T = expectedIterator.next()
 
+            println("index: $i : ${actual == expected}")
+            println("index: $i : actual: $actual")
+            println("index: $i : expected: $expected")
+            println()
+
             if (actual != expected) {
                 throw AssertionError("actual: ${actual}, expected: ${expected}, index: $i")
             }
