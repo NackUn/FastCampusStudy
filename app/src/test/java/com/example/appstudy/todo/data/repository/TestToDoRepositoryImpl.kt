@@ -34,7 +34,7 @@ class TestToDoRepositoryImpl : ToDoRepository {
         this.toDoList.add(todoItem)
     }
 
-    override suspend fun deleteToDoItem(id: Long) {
-        toDoList.remove(toDoList.find { it.id == id })
+    override suspend fun deleteToDoItem(id: Long): Boolean {
+        return toDoList.remove(toDoList.find { it.id == id })
     }
 }
