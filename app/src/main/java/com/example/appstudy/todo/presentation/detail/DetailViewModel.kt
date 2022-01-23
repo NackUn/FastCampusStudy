@@ -3,7 +3,6 @@ package com.example.appstudy.todo.presentation.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.appstudy.todo.domain.model.ToDoEntity
 import com.example.appstudy.todo.domain.usecase.todo.DeleteToDoItemUseCase
 import com.example.appstudy.todo.domain.usecase.todo.GetToDoItemUseCase
 import com.example.appstudy.todo.domain.usecase.todo.UpdateToDoItemUseCase
@@ -25,7 +24,7 @@ internal class DetailViewModel(
     override fun fetchData(): Job = viewModelScope.launch {
         when (detailMode) {
             DetailMode.DETAIL -> {
-                _toDoItemState.postValue(ToDoDetailState.Loading)
+                loadingState()
                 try {
                     getToDoItemUseCase(id)?.let {
                         _toDoItemState.postValue(ToDoDetailState.Success(it))
@@ -43,6 +42,10 @@ internal class DetailViewModel(
         }
     }
 
+    private fun loadingState() {
+        _toDoItemState.postValue(ToDoDetailState.Loading)
+    }
+
     fun deleteToDoItem() = viewModelScope.launch {
         try {
             if (deleteToDoItemUseCase(id)) {
@@ -56,18 +59,41 @@ internal class DetailViewModel(
         }
     }
 
-    fun updateToDoItem() = viewModelScope.launch {
-        _toDoItemState.postValue(ToDoDetailState.Loading)
-        val currentToDoItem = ToDoEntity(
-            id = id,
-            title = "title $id",
-            description = "description $id",
-            hasCompleted = true
-        )
-        if (updateToDoItemUseCase(currentToDoItem)) {
-            _toDoItemState.postValue(ToDoDetailState.Success(currentToDoItem))
-        } else {
-            _toDoItemState.postValue(ToDoDetailState.Error)
+    fun updateToDoItem(
+        title: String? = null,
+        description: String? = null,
+        hasComplete: Boolean? = null
+    ) = viewModelScope.launch {
+        loadingState()
+        when (detailMode) {
+            DetailMode.DETAIL -> {
+                try {
+                    getToDoItemUseCase(id)?.let {
+                        val currentTitle = title ?: it.title
+                        val currentDescription = description ?: it.description
+                        val currentHasComplete = hasComplete ?: it.hasCompleted
+
+                        val currentToDoItem = it.copy(
+                            title = currentTitle,
+                            description = currentDescription,
+                            hasCompleted = currentHasComplete
+                        )
+                        if (updateToDoItemUseCase(currentToDoItem)) {
+                            _toDoItemState.postValue(ToDoDetailState.Success(currentToDoItem))
+                        } else {
+                            _toDoItemState.postValue(ToDoDetailState.Error)
+                        }
+                    } ?: kotlin.run {
+                        _toDoItemState.postValue(ToDoDetailState.Error)
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    _toDoItemState.postValue(ToDoDetailState.Error)
+                }
+            }
+            DetailMode.WRITE -> {
+                // TODO 나중에 작성모드로 상세화면 진입 로직 처리
+            }
         }
     }
 }

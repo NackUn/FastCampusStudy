@@ -43,8 +43,8 @@ internal class DetailViewModelTest : ViewModelTest() {
 
     private val mockItemAfterUpdate = ToDoEntity(
         id = id,
-        title = "title $id",
-        description = "description $id",
+        title = "title $id Update",
+        description = "description $id Update",
         hasCompleted = true
     )
 
@@ -72,8 +72,16 @@ internal class DetailViewModelTest : ViewModelTest() {
         .map {
             ToDoEntity(
                 id = it.toLong(),
-                title = "title $it",
-                description = "description $it",
+                title = if (it == 1) {
+                    "title $it Update"
+                } else {
+                    "title $it"
+                },
+                description = if (it == 1) {
+                    "description $it Update"
+                } else {
+                    "description $it"
+                },
                 hasCompleted = it == 1
             )
         }
@@ -136,7 +144,11 @@ internal class DetailViewModelTest : ViewModelTest() {
 
         listViewModel.fetchData()
         detailViewModel.fetchData()
-        detailViewModel.updateToDoItem()
+        detailViewModel.updateToDoItem(
+            title = "title $id Update",
+            description = "description $id Update",
+            hasComplete = true
+        )
         listViewModel.fetchData()
 
         listTestObservable.assertValueSequence(
