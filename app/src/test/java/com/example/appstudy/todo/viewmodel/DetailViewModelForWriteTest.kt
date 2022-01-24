@@ -1,12 +1,11 @@
 package com.example.appstudy.todo.viewmodel
 
 import com.example.appstudy.todo.domain.model.ToDoEntity
-import com.example.appstudy.todo.domain.usecase.todo.InsertToDoItemUseCase
-import com.example.appstudy.todo.domain.usecase.todo.InsertToDoListUseCase
 import com.example.appstudy.todo.presentation.detail.DetailMode
 import com.example.appstudy.todo.presentation.detail.DetailViewModel
 import com.example.appstudy.todo.presentation.detail.ToDoDetailState
 import com.example.appstudy.todo.presentation.list.ListViewModel
+import com.example.appstudy.todo.presentation.list.ToDoListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
@@ -28,13 +27,10 @@ internal class DetailViewModelForWriteTest : ViewModelTest() {
     private val listViewModel: ListViewModel by inject()
     private val detailViewModel by inject<DetailViewModel> { parametersOf(DetailMode.WRITE, id) }
 
-    private val insertToDoListUseCase: InsertToDoListUseCase by inject()
-    private val insertToDoItemUseCase: InsertToDoItemUseCase by inject()
-
     private val mockItem = ToDoEntity(
         id = id,
-        title = "title $id",
-        description = "description $id",
+        title = "",
+        description = "",
         hasCompleted = false
     )
 
@@ -47,8 +43,38 @@ internal class DetailViewModelForWriteTest : ViewModelTest() {
         testObservable.assertValueSequence(
             listOf(
                 ToDoDetailState.UnInitialized,
-                ToDoDetailState.Loading,
                 ToDoDetailState.Write,
+            )
+        )
+    }
+
+    @Test
+    fun `test Item Insert`(): Unit = runBlockingTest {
+        val listTestObservable = listViewModel.toDoListState.test()
+        val detailTestObservable = detailViewModel.toDoItemState.test()
+
+        detailViewModel.updateToDoItem(
+            title = mockItem.title,
+            description = mockItem.description
+        )
+        detailTestObservable.assertValueSequence(
+            listOf(
+                ToDoDetailState.UnInitialized,
+                ToDoDetailState.Loading,
+                ToDoDetailState.Success(mockItem),
+            )
+        )
+
+        assert(detailViewModel.detailMode == DetailMode.DETAIL)
+        assert(detailViewModel.id == id)
+
+        // 뒤로나가서 리스트 보기
+        listViewModel.fetchData()
+        listTestObservable.assertValueSequence(
+            listOf(
+                ToDoListState.UnInitialized,
+                ToDoListState.Loading,
+                ToDoListState.Success(listOf(mockItem)),
             )
         )
     }

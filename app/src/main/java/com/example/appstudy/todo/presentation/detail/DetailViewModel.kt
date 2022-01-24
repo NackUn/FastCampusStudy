@@ -3,8 +3,10 @@ package com.example.appstudy.todo.presentation.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.appstudy.todo.domain.model.ToDoEntity
 import com.example.appstudy.todo.domain.usecase.todo.DeleteToDoItemUseCase
 import com.example.appstudy.todo.domain.usecase.todo.GetToDoItemUseCase
+import com.example.appstudy.todo.domain.usecase.todo.InsertToDoItemUseCase
 import com.example.appstudy.todo.domain.usecase.todo.UpdateToDoItemUseCase
 import com.example.appstudy.todo.presentation.base.BaseViewModel
 import kotlinx.coroutines.Job
@@ -16,15 +18,16 @@ internal class DetailViewModel(
     private val getToDoItemUseCase: GetToDoItemUseCase,
     private val deleteToDoItemUseCase: DeleteToDoItemUseCase,
     private val updateToDoItemUseCase: UpdateToDoItemUseCase,
+    private val insertToDoItemUseCase: InsertToDoItemUseCase,
 ) : BaseViewModel() {
 
     private var _toDoItemState = MutableLiveData<ToDoDetailState>(ToDoDetailState.UnInitialized)
     val toDoItemState: LiveData<ToDoDetailState> = _toDoItemState
 
     override fun fetchData(): Job = viewModelScope.launch {
-        loadingState()
         when (detailMode) {
             DetailMode.DETAIL -> {
+                loadingState()
                 try {
                     getToDoItemUseCase(id)?.let {
                         _toDoItemState.postValue(ToDoDetailState.Success(it))
@@ -92,7 +95,20 @@ internal class DetailViewModel(
                 }
             }
             DetailMode.WRITE -> {
-                // TODO 나중에 작성모드로 상세화면 진입 로직 처리
+                try {
+                    val toDoEntity = ToDoEntity(
+                        title = title ?: "",
+                        description = description ?: "",
+                        hasCompleted = hasComplete ?: false
+                    )
+                    val insertId = insertToDoItemUseCase(toDoEntity)
+                    _toDoItemState.postValue(ToDoDetailState.Success(toDoEntity))
+                    detailMode = DetailMode.DETAIL
+                    id = insertId
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    _toDoItemState.postValue(ToDoDetailState.Error)
+                }
             }
         }
     }

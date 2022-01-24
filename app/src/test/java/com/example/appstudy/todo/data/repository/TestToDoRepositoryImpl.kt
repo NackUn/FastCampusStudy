@@ -30,8 +30,9 @@ class TestToDoRepositoryImpl : ToDoRepository {
         toDoList.clear()
     }
 
-    override suspend fun insertToDoItem(todoItem: ToDoEntity) {
+    override suspend fun insertToDoItem(todoItem: ToDoEntity): Long {
         this.toDoList.add(todoItem)
+        return todoItem.id
     }
 
     override suspend fun deleteToDoItem(id: Long): Boolean {
