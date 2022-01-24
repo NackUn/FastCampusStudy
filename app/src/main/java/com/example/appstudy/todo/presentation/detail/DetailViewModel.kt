@@ -22,9 +22,9 @@ internal class DetailViewModel(
     val toDoItemState: LiveData<ToDoDetailState> = _toDoItemState
 
     override fun fetchData(): Job = viewModelScope.launch {
+        loadingState()
         when (detailMode) {
             DetailMode.DETAIL -> {
-                loadingState()
                 try {
                     getToDoItemUseCase(id)?.let {
                         _toDoItemState.postValue(ToDoDetailState.Success(it))
@@ -37,7 +37,7 @@ internal class DetailViewModel(
                 }
             }
             DetailMode.WRITE -> {
-                // TODO 나중에 작성모드로 상세화면 진입 로직 처리
+                _toDoItemState.postValue(ToDoDetailState.Write)
             }
         }
     }
