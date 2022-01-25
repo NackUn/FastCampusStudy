@@ -3,32 +3,32 @@ package com.example.appstudy.todo.data.repository
 import com.example.appstudy.todo.data.model.toEntity
 import com.example.appstudy.todo.data.model.toModel
 import com.example.appstudy.todo.data.todo.TodoDao
-import com.example.appstudy.todo.domain.model.ToDoEntity
-import com.example.appstudy.todo.domain.repository.ToDoRepository
+import com.example.appstudy.todo.domain.model.TodoEntity
+import com.example.appstudy.todo.domain.repository.TodoRepository
 
 class TodoRepositoryImpl(
     private val todoDao: TodoDao,
-) : ToDoRepository {
-    override suspend fun insertToDoList(todoList: List<ToDoEntity>) {
+) : TodoRepository {
+    override suspend fun insertTodoList(todoList: List<TodoEntity>) {
         todoDao.insertAll(todoList.map { it.toModel() })
     }
 
-    override suspend fun getToDoList(): List<ToDoEntity> =
+    override suspend fun getTodoList(): List<TodoEntity> =
         todoDao.getAll().map { it.toEntity() }
 
-    override suspend fun updateToDoItem(todoItem: ToDoEntity): Boolean =
+    override suspend fun updateTodoItem(todoItem: TodoEntity): Boolean =
         todoDao.update(todoItem.toModel())
 
-    override suspend fun getToDoItem(id: Long): ToDoEntity? =
+    override suspend fun getTodoItem(id: Long): TodoEntity? =
         todoDao.getById(id)?.toEntity()
 
-    override suspend fun deleteAllToDoItem() {
+    override suspend fun deleteAllTodoItem() {
         todoDao.deleteAll()
     }
 
-    override suspend fun insertToDoItem(todoItem: ToDoEntity): Long =
+    override suspend fun insertTodoItem(todoItem: TodoEntity): Long =
         todoDao.insert(todoItem.toModel())
 
-    override suspend fun deleteToDoItem(id: Long): Boolean =
+    override suspend fun deleteTodoItem(id: Long): Boolean =
         todoDao.deleteById(id)
 }

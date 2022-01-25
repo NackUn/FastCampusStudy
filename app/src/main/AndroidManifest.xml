@@ -3,7 +3,7 @@
     package="com.example.appstudy">
 
     <application
-        android:name=".ToDoApplication"
+        android:name=".TodoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"

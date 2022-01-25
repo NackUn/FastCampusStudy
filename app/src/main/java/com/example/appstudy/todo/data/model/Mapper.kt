@@ -1,9 +1,9 @@
 package com.example.appstudy.todo.data.model
 
-import com.example.appstudy.todo.domain.model.ToDoEntity
+import com.example.appstudy.todo.domain.model.TodoEntity
 
-fun ToDoEntity.toModel(): Todo =
+fun TodoEntity.toModel(): Todo =
     Todo(id, title, description, hasCompleted)
 
-fun Todo.toEntity(): ToDoEntity =
-    ToDoEntity(id, title, description, hasCompleted)
+fun Todo.toEntity(): TodoEntity =
+    TodoEntity(id, title, description, hasCompleted)

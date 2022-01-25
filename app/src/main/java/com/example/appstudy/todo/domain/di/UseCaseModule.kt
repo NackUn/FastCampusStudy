@@ -1,20 +1,20 @@
 package com.example.appstudy.todo.domain.di
 
-import com.example.appstudy.todo.domain.usecase.todo.DeleteAllToDoItemUseCase
-import com.example.appstudy.todo.domain.usecase.todo.DeleteToDoItemUseCase
-import com.example.appstudy.todo.domain.usecase.todo.GetToDoItemUseCase
-import com.example.appstudy.todo.domain.usecase.todo.GetToDoListUseCase
-import com.example.appstudy.todo.domain.usecase.todo.InsertToDoItemUseCase
-import com.example.appstudy.todo.domain.usecase.todo.InsertToDoListUseCase
-import com.example.appstudy.todo.domain.usecase.todo.UpdateToDoItemUseCase
+import com.example.appstudy.todo.domain.usecase.todo.DeleteAllTodoItemUseCase
+import com.example.appstudy.todo.domain.usecase.todo.DeleteTodoItemUseCase
+import com.example.appstudy.todo.domain.usecase.todo.GetTodoItemUseCase
+import com.example.appstudy.todo.domain.usecase.todo.GetTodoListUseCase
+import com.example.appstudy.todo.domain.usecase.todo.InsertTodoItemUseCase
+import com.example.appstudy.todo.domain.usecase.todo.InsertTodoListUseCase
+import com.example.appstudy.todo.domain.usecase.todo.UpdateTodoItemUseCase
 import org.koin.dsl.module
 
 internal val useCaseModule = module {
-    factory { InsertToDoListUseCase(get()) }
-    factory { GetToDoListUseCase(get()) }
-    factory { UpdateToDoItemUseCase(get()) }
-    factory { GetToDoItemUseCase(get()) }
-    factory { DeleteAllToDoItemUseCase(get()) }
-    factory { InsertToDoItemUseCase(get()) }
-    factory { DeleteToDoItemUseCase(get()) }
+    factory { InsertTodoListUseCase(get()) }
+    factory { GetTodoListUseCase(get()) }
+    factory { UpdateTodoItemUseCase(get()) }
+    factory { GetTodoItemUseCase(get()) }
+    factory { DeleteAllTodoItemUseCase(get()) }
+    factory { InsertTodoItemUseCase(get()) }
+    factory { DeleteTodoItemUseCase(get()) }
 }

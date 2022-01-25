@@ -3,11 +3,11 @@ package com.example.appstudy.todo.presentation.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.appstudy.todo.domain.model.ToDoEntity
-import com.example.appstudy.todo.domain.usecase.todo.DeleteToDoItemUseCase
-import com.example.appstudy.todo.domain.usecase.todo.GetToDoItemUseCase
-import com.example.appstudy.todo.domain.usecase.todo.InsertToDoItemUseCase
-import com.example.appstudy.todo.domain.usecase.todo.UpdateToDoItemUseCase
+import com.example.appstudy.todo.domain.model.TodoEntity
+import com.example.appstudy.todo.domain.usecase.todo.DeleteTodoItemUseCase
+import com.example.appstudy.todo.domain.usecase.todo.GetTodoItemUseCase
+import com.example.appstudy.todo.domain.usecase.todo.InsertTodoItemUseCase
+import com.example.appstudy.todo.domain.usecase.todo.UpdateTodoItemUseCase
 import com.example.appstudy.todo.presentation.base.BaseViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
@@ -15,54 +15,54 @@ import kotlinx.coroutines.launch
 internal class DetailViewModel(
     var detailMode: DetailMode,
     var id: Long = -1,
-    private val getToDoItemUseCase: GetToDoItemUseCase,
-    private val deleteToDoItemUseCase: DeleteToDoItemUseCase,
-    private val updateToDoItemUseCase: UpdateToDoItemUseCase,
-    private val insertToDoItemUseCase: InsertToDoItemUseCase,
+    private val getTodoItemUseCase: GetTodoItemUseCase,
+    private val deleteTodoItemUseCase: DeleteTodoItemUseCase,
+    private val updateTodoItemUseCase: UpdateTodoItemUseCase,
+    private val insertTodoItemUseCase: InsertTodoItemUseCase,
 ) : BaseViewModel() {
 
-    private var _toDoItemState = MutableLiveData<ToDoDetailState>(ToDoDetailState.UnInitialized)
-    val toDoItemState: LiveData<ToDoDetailState> = _toDoItemState
+    private var _toDoItemState = MutableLiveData<TodoDetailState>(TodoDetailState.UnInitialized)
+    val todoItemState: LiveData<TodoDetailState> = _toDoItemState
 
     override fun fetchData(): Job = viewModelScope.launch {
         when (detailMode) {
             DetailMode.DETAIL -> {
                 loadingState()
                 try {
-                    getToDoItemUseCase(id)?.let {
-                        _toDoItemState.postValue(ToDoDetailState.Success(it))
+                    getTodoItemUseCase(id)?.let {
+                        _toDoItemState.postValue(TodoDetailState.Success(it))
                     } ?: kotlin.run {
-                        _toDoItemState.postValue(ToDoDetailState.Error)
+                        _toDoItemState.postValue(TodoDetailState.Error)
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    _toDoItemState.postValue(ToDoDetailState.Error)
+                    _toDoItemState.postValue(TodoDetailState.Error)
                 }
             }
             DetailMode.WRITE -> {
-                _toDoItemState.postValue(ToDoDetailState.Write)
+                _toDoItemState.postValue(TodoDetailState.Write)
             }
         }
     }
 
     private fun loadingState() {
-        _toDoItemState.postValue(ToDoDetailState.Loading)
+        _toDoItemState.postValue(TodoDetailState.Loading)
     }
 
-    fun deleteToDoItem() = viewModelScope.launch {
+    fun deleteTodoItem() = viewModelScope.launch {
         try {
-            if (deleteToDoItemUseCase(id)) {
-                _toDoItemState.postValue(ToDoDetailState.Delete)
+            if (deleteTodoItemUseCase(id)) {
+                _toDoItemState.postValue(TodoDetailState.Delete)
             } else {
-                _toDoItemState.postValue(ToDoDetailState.Error)
+                _toDoItemState.postValue(TodoDetailState.Error)
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            _toDoItemState.postValue(ToDoDetailState.Error)
+            _toDoItemState.postValue(TodoDetailState.Error)
         }
     }
 
-    fun updateToDoItem(
+    fun updateTodoItem(
         title: String? = null,
         description: String? = null,
         hasComplete: Boolean? = null
@@ -71,43 +71,43 @@ internal class DetailViewModel(
         when (detailMode) {
             DetailMode.DETAIL -> {
                 try {
-                    getToDoItemUseCase(id)?.let {
+                    getTodoItemUseCase(id)?.let {
                         val currentTitle = title ?: it.title
                         val currentDescription = description ?: it.description
                         val currentHasComplete = hasComplete ?: it.hasCompleted
 
-                        val currentToDoItem = it.copy(
+                        val currentTodoItem = it.copy(
                             title = currentTitle,
                             description = currentDescription,
                             hasCompleted = currentHasComplete
                         )
-                        if (updateToDoItemUseCase(currentToDoItem)) {
-                            _toDoItemState.postValue(ToDoDetailState.Success(currentToDoItem))
+                        if (updateTodoItemUseCase(currentTodoItem)) {
+                            _toDoItemState.postValue(TodoDetailState.Success(currentTodoItem))
                         } else {
-                            _toDoItemState.postValue(ToDoDetailState.Error)
+                            _toDoItemState.postValue(TodoDetailState.Error)
                         }
                     } ?: kotlin.run {
-                        _toDoItemState.postValue(ToDoDetailState.Error)
+                        _toDoItemState.postValue(TodoDetailState.Error)
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    _toDoItemState.postValue(ToDoDetailState.Error)
+                    _toDoItemState.postValue(TodoDetailState.Error)
                 }
             }
             DetailMode.WRITE -> {
                 try {
-                    val toDoEntity = ToDoEntity(
+                    val toDoEntity = TodoEntity(
                         title = title ?: "",
                         description = description ?: "",
                         hasCompleted = hasComplete ?: false
                     )
-                    val insertId = insertToDoItemUseCase(toDoEntity)
-                    _toDoItemState.postValue(ToDoDetailState.Success(toDoEntity))
+                    val insertId = insertTodoItemUseCase(toDoEntity)
+                    _toDoItemState.postValue(TodoDetailState.Success(toDoEntity))
                     detailMode = DetailMode.DETAIL
                     id = insertId
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    _toDoItemState.postValue(ToDoDetailState.Error)
+                    _toDoItemState.postValue(TodoDetailState.Error)
                 }
             }
         }

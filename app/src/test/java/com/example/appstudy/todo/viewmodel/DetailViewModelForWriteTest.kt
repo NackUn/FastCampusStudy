@@ -1,11 +1,11 @@
 package com.example.appstudy.todo.viewmodel
 
-import com.example.appstudy.todo.domain.model.ToDoEntity
+import com.example.appstudy.todo.domain.model.TodoEntity
 import com.example.appstudy.todo.presentation.detail.DetailMode
 import com.example.appstudy.todo.presentation.detail.DetailViewModel
-import com.example.appstudy.todo.presentation.detail.ToDoDetailState
+import com.example.appstudy.todo.presentation.detail.TodoDetailState
 import com.example.appstudy.todo.presentation.list.ListViewModel
-import com.example.appstudy.todo.presentation.list.ToDoListState
+import com.example.appstudy.todo.presentation.list.TodoListState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
@@ -27,7 +27,7 @@ internal class DetailViewModelForWriteTest : ViewModelTest() {
     private val listViewModel: ListViewModel by inject()
     private val detailViewModel by inject<DetailViewModel> { parametersOf(DetailMode.WRITE, id) }
 
-    private val mockItem = ToDoEntity(
+    private val mockItem = TodoEntity(
         id = id,
         title = "",
         description = "",
@@ -36,32 +36,32 @@ internal class DetailViewModelForWriteTest : ViewModelTest() {
 
     @Test
     fun `test viewModel fetch`(): Unit = runBlockingTest {
-        val testObservable = detailViewModel.toDoItemState.test()
+        val testObservable = detailViewModel.todoItemState.test()
 
         detailViewModel.fetchData()
 
         testObservable.assertValueSequence(
             listOf(
-                ToDoDetailState.UnInitialized,
-                ToDoDetailState.Write,
+                TodoDetailState.UnInitialized,
+                TodoDetailState.Write,
             )
         )
     }
 
     @Test
     fun `test Item Insert`(): Unit = runBlockingTest {
-        val listTestObservable = listViewModel.toDoListState.test()
-        val detailTestObservable = detailViewModel.toDoItemState.test()
+        val listTestObservable = listViewModel.todoListState.test()
+        val detailTestObservable = detailViewModel.todoItemState.test()
 
-        detailViewModel.updateToDoItem(
+        detailViewModel.updateTodoItem(
             title = mockItem.title,
             description = mockItem.description
         )
         detailTestObservable.assertValueSequence(
             listOf(
-                ToDoDetailState.UnInitialized,
-                ToDoDetailState.Loading,
-                ToDoDetailState.Success(mockItem),
+                TodoDetailState.UnInitialized,
+                TodoDetailState.Loading,
+                TodoDetailState.Success(mockItem),
             )
         )
 
@@ -72,9 +72,9 @@ internal class DetailViewModelForWriteTest : ViewModelTest() {
         listViewModel.fetchData()
         listTestObservable.assertValueSequence(
             listOf(
-                ToDoListState.UnInitialized,
-                ToDoListState.Loading,
-                ToDoListState.Success(listOf(mockItem)),
+                TodoListState.UnInitialized,
+                TodoListState.Loading,
+                TodoListState.Success(listOf(mockItem)),
             )
         )
     }

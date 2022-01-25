@@ -2,51 +2,50 @@ package com.example.appstudy.todo.presentation.list
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.appstudy.todo.domain.model.ToDoEntity
-import com.example.appstudy.todo.domain.usecase.todo.DeleteAllToDoItemUseCase
-import com.example.appstudy.todo.domain.usecase.todo.GetToDoListUseCase
-import com.example.appstudy.todo.domain.usecase.todo.UpdateToDoItemUseCase
+import com.example.appstudy.todo.domain.model.TodoEntity
+import com.example.appstudy.todo.domain.usecase.todo.DeleteAllTodoItemUseCase
+import com.example.appstudy.todo.domain.usecase.todo.GetTodoListUseCase
+import com.example.appstudy.todo.domain.usecase.todo.UpdateTodoItemUseCase
 import com.example.appstudy.todo.presentation.base.BaseViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 /**
  * 필요한 UseCase
- * 1. [GetToDoListUseCase]
- * 2. [UpdateToDoItemUseCase]
- * 3. [deleteAllToDoItemUseCase]
+ * 1. [GetTodoListUseCase]
+ * 2. [UpdateTodoItemUseCase]
+ * 3. [deleteAllTodoItemUseCase]
  */
 internal class ListViewModel(
-    private val getToDoListUseCase: GetToDoListUseCase,
-    private val updateToDoItemUseCase: UpdateToDoItemUseCase,
-    private val deleteAllToDoItemUseCase: DeleteAllToDoItemUseCase,
+    private val getTodoListUseCase: GetTodoListUseCase,
+    private val updateTodoItemUseCase: UpdateTodoItemUseCase,
+    private val deleteAllTodoItemUseCase: DeleteAllTodoItemUseCase,
 ) : BaseViewModel() {
 
-    private var _toDoListState = MutableLiveData<ToDoListState>(ToDoListState.UnInitialized)
-    val toDoListState: LiveData<ToDoListState> = _toDoListState
+    private var _toDoListState = MutableLiveData<TodoListState>(TodoListState.UnInitialized)
+    val todoListState: LiveData<TodoListState> = _toDoListState
 
-    private fun setState(toDoListState: ToDoListState) {
-        _toDoListState.postValue(toDoListState)
+    private fun setState(todoListState: TodoListState) {
+        _toDoListState.postValue(todoListState)
     }
 
     private fun loadingState() {
-        setState(ToDoListState.Loading)
+        setState(TodoListState.Loading)
     }
 
     override fun fetchData(): Job = viewModelScope.launch {
         loadingState()
-        setState(ToDoListState.Success(getToDoListUseCase()))
+        setState(TodoListState.Success(getTodoListUseCase()))
     }
 
-    fun updateItem(toDoEntity: ToDoEntity) = viewModelScope.launch {
-        updateToDoItemUseCase(toDoEntity)
+    fun updateItem(todoEntity: TodoEntity) = viewModelScope.launch {
+        updateTodoItemUseCase(todoEntity)
     }
 
     fun deleteAll() = viewModelScope.launch {
         loadingState()
-        deleteAllToDoItemUseCase()
-        setState(ToDoListState.Success(getToDoListUseCase()))
+        deleteAllTodoItemUseCase()
+        setState(TodoListState.Success(getTodoListUseCase()))
     }
 }
