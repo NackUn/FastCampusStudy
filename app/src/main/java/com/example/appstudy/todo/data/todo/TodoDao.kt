@@ -22,11 +22,11 @@ interface TodoDao {
     suspend fun insertAll(todos: List<Todo>)
 
     @Query("DELETE FROM Todo WHERE id = :id")
-    suspend fun deleteById(id: Long): Boolean
+    suspend fun deleteById(id: Long)
 
     @Query("DELETE FROM Todo")
     suspend fun deleteAll()
 
     @Update
-    suspend fun update(todo: Todo): Boolean
+    suspend fun update(todo: Todo)
 }

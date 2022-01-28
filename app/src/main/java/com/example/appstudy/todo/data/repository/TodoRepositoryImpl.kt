@@ -17,7 +17,12 @@ class TodoRepositoryImpl(
         todoDao.getAll().map { it.toEntity() }
 
     override suspend fun updateTodoItem(todoItem: TodoEntity): Boolean =
-        todoDao.update(todoItem.toModel())
+        try {
+            todoDao.update(todoItem.toModel())
+            true
+        } catch (e: Exception) {
+            false
+        }
 
     override suspend fun getTodoItem(id: Long): TodoEntity? =
         todoDao.getById(id)?.toEntity()
@@ -30,5 +35,10 @@ class TodoRepositoryImpl(
         todoDao.insert(todoItem.toModel())
 
     override suspend fun deleteTodoItem(id: Long): Boolean =
-        todoDao.deleteById(id)
+        try {
+            todoDao.deleteById(id)
+            true
+        } catch (e: Exception) {
+            false
+        }
 }
