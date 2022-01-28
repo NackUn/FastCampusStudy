@@ -2,10 +2,10 @@ package com.example.appstudy.todo.data.todo
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.appstudy.todo.domain.model.TodoEntity
+import com.example.appstudy.todo.data.model.Todo
 
 @Database(
-    entities = [TodoEntity::class],
+    entities = [Todo::class],
     version = 1,
     exportSchema = false
 )
