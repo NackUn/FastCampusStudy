@@ -2,9 +2,9 @@ package com.example.appstudy
 
 import android.app.Application
 import com.example.appstudy.todo.data.di.databaseModule
-import com.example.appstudy.todo.di.appModule
 import com.example.appstudy.todo.data.di.repositoryModule
 import com.example.appstudy.todo.domain.di.useCaseModule
+import com.example.appstudy.todo.presentation.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -19,10 +19,10 @@ class TodoApplication : Application() {
             androidLogger(Level.ERROR)
             androidContext(this@TodoApplication)
             modules(
-                appModule,
                 databaseModule,
                 repositoryModule,
-                useCaseModule
+                useCaseModule,
+                viewModelModule
             )
         }
     }
