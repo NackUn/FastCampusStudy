@@ -1,4 +1,4 @@
-package com.example.appstudy.todo.data.todo
+package com.example.appstudy.todo.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

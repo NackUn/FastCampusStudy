@@ -2,7 +2,7 @@ package com.example.appstudy.todo.data.repository
 
 import com.example.appstudy.todo.data.model.toEntity
 import com.example.appstudy.todo.data.model.toModel
-import com.example.appstudy.todo.data.todo.TodoDao
+import com.example.appstudy.todo.data.local.TodoDao
 import com.example.appstudy.todo.domain.model.TodoEntity
 import com.example.appstudy.todo.domain.repository.TodoRepository
 
