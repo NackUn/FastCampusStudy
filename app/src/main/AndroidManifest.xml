@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppStudy">
-        <activity android:name=".todo.presentation.list.ListActivity"
+        <activity
+            android:name=".todo.presentation.list.ListActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,9 +19,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".main.MainActivity" />
+
         <activity android:name=".bmi.BmiActivity" />
         <activity android:name=".bmi.ResultActivity" />
+
+        <activity android:name=".todo.presentation.detail.DetailActivity" />
     </application>
 
 </manifest>
