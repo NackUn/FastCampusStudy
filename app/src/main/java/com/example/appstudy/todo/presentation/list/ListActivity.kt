@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.appstudy.R
 import com.example.appstudy.databinding.ActivityListBinding
 import com.example.appstudy.todo.presentation.base.BaseActivity
+import com.example.appstudy.todo.presentation.detail.DetailActivity
+import com.example.appstudy.todo.presentation.detail.DetailMode
 import com.example.appstudy.todo.presentation.util.toModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +26,13 @@ internal class ListActivity : BaseActivity<ListViewModel>(), CoroutineScope {
 
     private lateinit var binding: ActivityListBinding
     private lateinit var adapter: ListAdapter
+
+    private val startDetailActivity =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                viewModel.fetchData()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +51,12 @@ internal class ListActivity : BaseActivity<ListViewModel>(), CoroutineScope {
         }
 
         listButtonAdd.setOnClickListener {
-            // TODO 디테일 액티비티로 이동
+            startDetailActivity.launch(
+                DetailActivity.getIntent(
+                    this@ListActivity,
+                    DetailMode.WRITE
+                )
+            )
         }
     }
 
@@ -81,7 +96,13 @@ internal class ListActivity : BaseActivity<ListViewModel>(), CoroutineScope {
             adapter.setToDoList(
                 state.todoList.toModel(),
                 toDoItemClickListener = {
-                    // TODO 아이템 클릭 시 디테일로 이동
+                    startDetailActivity.launch(
+                        DetailActivity.getIntent(
+                            this@ListActivity,
+                            DetailMode.DETAIL,
+                            it.id
+                        )
+                    )
                 }, toDoCheckListener = {
                     viewModel.updateItem(it)
                 }
