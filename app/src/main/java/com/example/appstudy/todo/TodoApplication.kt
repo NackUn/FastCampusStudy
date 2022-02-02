@@ -1,4 +1,4 @@
-package com.example.appstudy
+package com.example.appstudy.todo
 
 import android.app.Application
 import com.example.appstudy.todo.data.di.databaseModule
