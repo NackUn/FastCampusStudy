@@ -70,6 +70,6 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    // swipeRefreshLayout
-    implementation 'com.android.support:support-v4:30.0.3'
+    // swipe refresh layout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 }
