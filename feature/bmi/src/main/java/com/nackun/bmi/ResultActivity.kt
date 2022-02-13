@@ -1,9 +1,8 @@
-package com.example.appstudy.bmi
+package com.nackun.bmi
 
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.appstudy.R
 import kotlin.math.pow
 
 class ResultActivity : AppCompatActivity() {

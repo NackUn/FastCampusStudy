@@ -22,9 +22,6 @@
 
         <activity android:name=".main.MainActivity" />
 
-        <activity android:name=".bmi.BmiActivity" />
-        <activity android:name=".bmi.ResultActivity" />
-
         <activity android:name=".todo.presentation.detail.DetailActivity" />
     </application>
 

@@ -1,4 +1,4 @@
-package com.example.appstudy.bmi
+package com.nackun.bmi
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,8 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.example.appstudy.R
-import com.example.appstudy.databinding.ActivityBmiBinding
+import com.nackun.bmi.databinding.ActivityBmiBinding
 
 class BmiActivity : AppCompatActivity() {
     private lateinit var dataBinding: ActivityBmiBinding
