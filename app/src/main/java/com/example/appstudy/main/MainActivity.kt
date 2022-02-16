@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.appstudy.R
 import com.example.appstudy.databinding.ActivityMainBinding
 import com.nackun.bmi.BmiActivity
-import com.example.appstudy.todo.presentation.list.ListActivity
+import com.nackun.todo.presentation.list.ListActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var dataBinding: ActivityMainBinding

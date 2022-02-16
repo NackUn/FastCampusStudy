@@ -2,3 +2,4 @@ include ':app'
 rootProject.name = "AppStudy"
 include ':feature'
 include ':feature:bmi'
+include ':feature:todo'
