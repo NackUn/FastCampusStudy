@@ -8,7 +8,7 @@ import com.nackun.domain.todo.usecase.todo.DeleteTodoItemUseCase
 import com.nackun.domain.todo.usecase.todo.GetTodoItemUseCase
 import com.nackun.domain.todo.usecase.todo.InsertTodoItemUseCase
 import com.nackun.domain.todo.usecase.todo.UpdateTodoItemUseCase
-import com.nackun.todo.presentation.base.BaseViewModel
+import com.nackun.base.BaseViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 

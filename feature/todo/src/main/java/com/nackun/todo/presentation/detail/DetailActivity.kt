@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.view.isGone
 import com.nackun.todo.databinding.ActivityDetailBinding
-import com.nackun.todo.presentation.base.BaseActivity
+import com.nackun.base.BaseActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

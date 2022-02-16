@@ -1,4 +1,4 @@
-package com.nackun.todo.presentation.base
+package com.nackun.base
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

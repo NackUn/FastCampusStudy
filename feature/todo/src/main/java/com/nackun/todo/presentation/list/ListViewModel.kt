@@ -3,10 +3,10 @@ package com.nackun.todo.presentation.list
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.nackun.base.BaseViewModel
 import com.nackun.domain.todo.usecase.todo.DeleteAllTodoItemUseCase
 import com.nackun.domain.todo.usecase.todo.GetTodoListUseCase
 import com.nackun.domain.todo.usecase.todo.UpdateTodoItemUseCase
-import com.nackun.todo.presentation.base.BaseViewModel
 import com.nackun.todo.presentation.util.toEntity
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch

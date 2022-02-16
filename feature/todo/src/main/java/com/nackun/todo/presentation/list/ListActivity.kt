@@ -7,9 +7,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isGone
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.nackun.base.BaseActivity
 import com.nackun.todo.R
 import com.nackun.todo.databinding.ActivityListBinding
-import com.nackun.todo.presentation.base.BaseActivity
 import com.nackun.todo.presentation.util.toModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
