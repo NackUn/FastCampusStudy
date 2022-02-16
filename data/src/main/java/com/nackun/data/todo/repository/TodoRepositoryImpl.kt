@@ -1,8 +1,8 @@
-package com.example.appstudy.todo.data.repository
+package com.nackun.data.todo.repository
 
-import com.example.appstudy.todo.data.model.toEntity
-import com.example.appstudy.todo.data.model.toModel
-import com.example.appstudy.todo.data.local.TodoDao
+import com.nackun.data.todo.model.toEntity
+import com.nackun.data.todo.model.toModel
+import com.nackun.data.todo.local.TodoDao
 import com.example.appstudy.todo.domain.model.TodoEntity
 import com.example.appstudy.todo.domain.repository.TodoRepository
 

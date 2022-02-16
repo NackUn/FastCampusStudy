@@ -1,8 +1,8 @@
-package com.example.appstudy.todo.data.local
+package com.nackun.data.todo.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.appstudy.todo.data.model.Todo
+import com.nackun.data.todo.model.Todo
 
 @Database(
     entities = [Todo::class],

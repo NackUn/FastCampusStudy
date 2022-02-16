@@ -1,4 +1,4 @@
-package com.example.appstudy.todo.data.model
+package com.nackun.data.todo.model
 
 import com.example.appstudy.todo.domain.model.TodoEntity
 

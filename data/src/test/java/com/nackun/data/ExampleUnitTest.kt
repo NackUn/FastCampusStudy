@@ -1,4 +1,4 @@
-package com.nackun.todo
+package com.nackun.data
 
 import org.junit.Test
 

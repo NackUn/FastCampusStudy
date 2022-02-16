@@ -1,11 +1,11 @@
-package com.example.appstudy.todo.data.local
+package com.nackun.data.todo.local
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.appstudy.todo.data.model.Todo
+import com.nackun.data.todo.model.Todo
 
 @Dao
 interface TodoDao {

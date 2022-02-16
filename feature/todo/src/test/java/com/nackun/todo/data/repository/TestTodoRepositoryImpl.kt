@@ -1,4 +1,4 @@
-package com.example.appstudy.todo.data.repository
+package com.nackun.todo.data.repository
 
 import com.example.appstudy.todo.domain.model.TodoEntity
 import com.example.appstudy.todo.domain.repository.TodoRepository
