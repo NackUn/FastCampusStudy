@@ -1,6 +1,6 @@
-package com.example.appstudy.todo.domain.repository
+package com.nackun.domain.todo.repository
 
-import com.example.appstudy.todo.domain.model.TodoEntity
+import com.nackun.domain.todo.model.TodoEntity
 
 /**
  * 1. [insertTodoList]

@@ -1,6 +1,6 @@
 package com.nackun.todo.viewmodel
 
-import com.example.appstudy.todo.domain.model.TodoEntity
+import com.nackun.domain.todo.model.TodoEntity
 import com.nackun.todo.presentation.detail.DetailMode
 import com.nackun.todo.presentation.detail.DetailViewModel
 import com.nackun.todo.presentation.list.ListViewModel

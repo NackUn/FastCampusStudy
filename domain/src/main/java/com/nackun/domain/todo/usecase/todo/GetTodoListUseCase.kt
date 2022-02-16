@@ -1,6 +1,6 @@
 package com.nackun.domain.todo.usecase.todo
 
-import com.example.appstudy.todo.domain.repository.TodoRepository
+import com.nackun.domain.todo.repository.TodoRepository
 import com.nackun.domain.todo.usecase.UseCase
 
 class GetTodoListUseCase(

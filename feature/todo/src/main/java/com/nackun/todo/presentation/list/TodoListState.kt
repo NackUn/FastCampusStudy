@@ -1,6 +1,6 @@
 package com.nackun.todo.presentation.list
 
-import com.example.appstudy.todo.domain.model.TodoEntity
+import com.nackun.domain.todo.model.TodoEntity
 
 sealed class TodoListState {
     object UnInitialized : TodoListState()

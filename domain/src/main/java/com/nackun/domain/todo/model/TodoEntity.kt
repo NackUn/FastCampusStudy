@@ -1,4 +1,4 @@
-package com.example.appstudy.todo.domain.model
+package com.nackun.domain.todo.model
 
 data class TodoEntity(
     val id: Long = 0,

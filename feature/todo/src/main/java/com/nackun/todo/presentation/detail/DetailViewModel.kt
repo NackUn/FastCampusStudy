@@ -3,7 +3,7 @@ package com.nackun.todo.presentation.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.appstudy.todo.domain.model.TodoEntity
+import com.nackun.domain.todo.model.TodoEntity
 import com.nackun.domain.todo.usecase.todo.DeleteTodoItemUseCase
 import com.nackun.domain.todo.usecase.todo.GetTodoItemUseCase
 import com.nackun.domain.todo.usecase.todo.InsertTodoItemUseCase

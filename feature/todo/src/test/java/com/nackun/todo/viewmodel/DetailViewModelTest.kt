@@ -1,6 +1,6 @@
 package com.nackun.todo.viewmodel
 
-import com.example.appstudy.todo.domain.model.TodoEntity
+import com.nackun.domain.todo.model.TodoEntity
 import com.nackun.domain.todo.usecase.todo.InsertTodoItemUseCase
 import com.nackun.domain.todo.usecase.todo.InsertTodoListUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi

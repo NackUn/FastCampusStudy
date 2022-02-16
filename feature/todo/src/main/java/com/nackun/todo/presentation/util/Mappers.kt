@@ -1,6 +1,6 @@
 package com.nackun.todo.presentation.util
 
-import com.example.appstudy.todo.domain.model.TodoEntity
+import com.nackun.domain.todo.model.TodoEntity
 import com.nackun.todo.presentation.list.ListTodoModel
 
 internal fun List<TodoEntity>.toModel(): List<ListTodoModel> = this.map {

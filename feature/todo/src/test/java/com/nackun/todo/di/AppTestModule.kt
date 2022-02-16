@@ -1,6 +1,6 @@
 package com.nackun.todo.di
 
-import com.example.appstudy.todo.domain.repository.TodoRepository
+import com.nackun.domain.todo.repository.TodoRepository
 import com.nackun.domain.todo.usecase.todo.DeleteAllTodoItemUseCase
 import com.nackun.domain.todo.usecase.todo.DeleteTodoItemUseCase
 import com.nackun.domain.todo.usecase.todo.GetTodoItemUseCase

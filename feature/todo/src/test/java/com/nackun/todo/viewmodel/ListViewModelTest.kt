@@ -1,9 +1,10 @@
 package com.nackun.todo.viewmodel
 
-import com.example.appstudy.todo.domain.model.TodoEntity
+import com.nackun.domain.todo.model.TodoEntity
 import com.nackun.domain.todo.usecase.todo.GetTodoItemUseCase
 import com.nackun.domain.todo.usecase.todo.InsertTodoListUseCase
 import com.nackun.todo.presentation.list.ListViewModel
+import com.nackun.todo.presentation.util.toModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
@@ -74,7 +75,7 @@ internal class ListViewModelTest : ViewModelTest() {
             description = "description 1",
             hasCompleted = true
         )
-        viewModel.updateItem(todo)
+        viewModel.updateItem(todo.toModel())
         assert(getTodoItemUseCase(id = todo.id) == todo)
     }
 

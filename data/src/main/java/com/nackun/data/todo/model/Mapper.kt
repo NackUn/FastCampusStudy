@@ -1,6 +1,6 @@
 package com.nackun.data.todo.model
 
-import com.example.appstudy.todo.domain.model.TodoEntity
+import com.nackun.domain.todo.model.TodoEntity
 
 fun TodoEntity.toModel(): Todo =
     Todo(id, title, description, hasCompleted)

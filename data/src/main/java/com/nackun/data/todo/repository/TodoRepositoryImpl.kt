@@ -3,8 +3,8 @@ package com.nackun.data.todo.repository
 import com.nackun.data.todo.model.toEntity
 import com.nackun.data.todo.model.toModel
 import com.nackun.data.todo.local.TodoDao
-import com.example.appstudy.todo.domain.model.TodoEntity
-import com.example.appstudy.todo.domain.repository.TodoRepository
+import com.nackun.domain.todo.model.TodoEntity
+import com.nackun.domain.todo.repository.TodoRepository
 
 class TodoRepositoryImpl(
     private val todoDao: TodoDao,
