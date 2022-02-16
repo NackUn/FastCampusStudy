@@ -13,8 +13,8 @@ https://fastcampus.co.kr/dev_online_androidappfinal
 <br>
 
 ## 패키지(진도)
-* /appstudy/bmi : Part 1. Before, Part 2. Basic Ch 01.
-* /appstudy/todo : Part 5. Advanced Ch 01.
+* /feature/bmi : Part 1. Before, Part 2. Basic Ch 01.
+* /feature/todo : Part 5. Advanced Ch 01.
 
 <br>
 
