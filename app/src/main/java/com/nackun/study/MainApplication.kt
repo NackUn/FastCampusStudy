@@ -1,4 +1,4 @@
-package com.example.appstudy
+package com.nackun.study
 
 import android.app.Application
 import com.nackun.data.todo.di.databaseModule

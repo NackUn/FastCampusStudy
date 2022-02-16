@@ -1,12 +1,12 @@
-package com.example.appstudy.main
+package com.nackun.study.main
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.example.appstudy.R
-import com.example.appstudy.databinding.ActivityMainBinding
 import com.nackun.bmi.BmiActivity
+import com.nackun.study.R
+import com.nackun.study.databinding.ActivityMainBinding
 import com.nackun.todo.presentation.list.ListActivity
 
 class MainActivity : AppCompatActivity() {
