@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import com.example.appstudy.R
 import com.example.appstudy.databinding.ActivityMainBinding
 import com.nackun.bmi.BmiActivity
+import com.example.appstudy.todo.presentation.list.ListActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var dataBinding: ActivityMainBinding
@@ -16,8 +17,13 @@ class MainActivity : AppCompatActivity() {
 
         dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        dataBinding.buttonMainBmi.setOnClickListener {
-            startActivity(Intent(this, BmiActivity::class.java))
+        dataBinding.run {
+            buttonMainBmi.setOnClickListener {
+                startActivity(Intent(this@MainActivity, BmiActivity::class.java))
+            }
+            buttonMainTodo.setOnClickListener {
+                startActivity(Intent(this@MainActivity, ListActivity::class.java))
+            }
         }
     }
 }
