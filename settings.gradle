@@ -1,3 +1,13 @@
+enableFeaturePreview("VERSION_CATALOGS")
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            from(files("libs.version.toml"))
+        }
+    }
+}
+
 include ':app'
 rootProject.name = "AppStudy"
 include ':feature'
