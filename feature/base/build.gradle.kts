@@ -13,7 +13,7 @@ android {
 
     buildTypes {
         getByName("release") {
-            minifyEnabled = false
+            isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -23,29 +23,12 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
-    implementation(project(":feature:base"))
-
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("com.google.android.material:material:1.5.0")
-
-    implementation("androidx.constraintlayout:constraintlayout:2.1.1")
-
-
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("org.mockito:mockito-inline:3.11.1")
-    testImplementation("androidx.arch.core:core-testing:2.1.0")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-
-    implementation("io.insert-koin:koin-android:3.1.2")
-    testImplementation("io.insert-koin:koin-test:3.1.2")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
-
-    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
 }
