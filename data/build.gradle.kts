@@ -23,10 +23,9 @@ android {
 dependencies {
     implementation(project(":domain"))
 
-    implementation("io.insert-koin:koin-android:3.1.2")
+    implementation(libs.koin.android)
 
-    implementation("androidx.room:room-runtime:2.4.0")
-    implementation("androidx.room:room-ktx:2.4.0")
-    annotationProcessor("androidx.room:room-compiler:2.4.0")
-    kapt("androidx.room:room-compiler:2.4.0")
+    implementation(libs.bundles.room)
+    annotationProcessor(libs.room.compiler)
+    kapt(libs.room.compiler)
 }
